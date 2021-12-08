@@ -85,6 +85,7 @@ class Avatar {
       break;
     }
     this.to_open_lip();
+    this.armSwing();
     this.layers.get(0).setTranslation(x, y);
     for (int i=0; i<layers.size(); i++) {
       layers.get(i).draw();
@@ -134,6 +135,14 @@ class Avatar {
   void sleep() {
     this.getClip("eye_l").num = 2;
     this.getClip("eye_r").num = 2;
+  }
+
+  void armSwing(){
+    if (frameCount % 4 < 2) {
+      this.getClip("right_arm").setRotation(PI/40-PI/3);
+    } else {
+      this.getClip("right_arm").setRotation(-PI/40-PI/3);
+    }
   }
 
   void smile() {
