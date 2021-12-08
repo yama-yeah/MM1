@@ -36,7 +36,7 @@ class Avatar {
 
     this.getClip("face").images.add(0, loadImage("face1.png"));
     this.getClip("lip").images.add(0, loadImage("lip.png"));
-    //this.getClip("lip").images.add(1, loadImage("lip_open.png"));
+    this.getClip("lip").images.add(1, loadImage("open_lip.png"));
     //this.getClip("lip").images.add(2, loadImage("lip_anger.png"));
     //this.getClip("lip").images.add(3, loadImage("lip_smile.png"));
     //this.getClip("lip").images.add(4, loadImage("lip_surprised.png"));
@@ -53,6 +53,8 @@ class Avatar {
     //this.getClip("face").setScale(0.2, 0.2);
     //this.getClip("body").setScale(3, 3);
     this.getClip("eye_r").setRotation(PI/40);
+    
+
   }
 
   void draw(int x, int y) {
@@ -82,6 +84,7 @@ class Avatar {
       this.normal();
       break;
     }
+    this.to_open_lip();
     this.layers.get(0).setTranslation(x, y);
     for (int i=0; i<layers.size(); i++) {
       layers.get(i).draw();
@@ -158,5 +161,15 @@ class Avatar {
     this.getClip("eye_r").setScale(2.0, 2.0);
     this.getClip("eyebrow_l").setRotation(PI/8.0);
     this.getClip("eyebrow_r").setRotation(-PI/8.0);
+  }
+  void to_open_lip() {
+    if(sound_level>150){
+      this.getClip("lip").setScale(0.8, 0.7);
+      this.getClip("lip").num = 1;
+    }
+    else{
+      this.getClip("lip").setScale(1, 1);
+      this.getClip("lip").num = 0;
+    }
   }
 }
