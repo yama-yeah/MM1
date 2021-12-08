@@ -73,7 +73,6 @@ class Clip {
     r = r.multiply(m3);
     r = r.multiply(m4);
     r = r.multiply(m5);
-   
     return r;
   }
   
