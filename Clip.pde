@@ -27,6 +27,12 @@ class Clip {
     num = 0;
   }
 
+  void reset() {
+    rad = drad;
+    sx = dsx;
+    sy = dsy;
+  }
+
   void setParent(Clip parent) {
     this.parent = parent;
   }
@@ -34,6 +40,11 @@ class Clip {
   void setTranslation(int x, int y) {
     this.tx = x;
     this.ty = y;
+  }
+
+  void addTranslation(int x, int y) {
+    this.tx += x;
+    this.ty += y;
   }
 
   void setRotation(float drad) {

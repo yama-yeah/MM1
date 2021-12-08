@@ -26,16 +26,16 @@ void draw() {
   background(0, 102, 153);
   sound_level = player.left.level()*1000;
   if(f){
-    textSize(40);
+    textSize(30);
     text("https://zenn.dev/antman/books/7767fc7ada0338",0,1000);
   }
   avatar.draw(mouseX, mouseY);
   //saveFrame("frames/######.png");
 }
 void stop(){
-player.close();
-minim.stop();
-super.stop();
+  player.close();
+  minim.stop();
+  super.stop();
 }
 
 void keyPressed() {
@@ -59,8 +59,7 @@ void keyPressed() {
     avatar.state = "surprised";
     break;
   case '+':
-    avatar.getClip("right_arm").setRotation(PI/360);
-    println("right_arm_rad"+avatar.getClip("right_arm").rad/PI);
+    avatar.onSwing();
     break;
   case '-':
     avatar.getClip("right_arm").setRotation(-PI/360);
