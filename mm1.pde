@@ -43,6 +43,11 @@ void keyPressed() {
     break;
   case '+':
     avatar.getClip("right_arm").setRotation(PI/360);
+    println("right_arm_rad"+avatar.getClip("right_arm").rad/PI);
+    break;
+  case '-':
+    avatar.getClip("right_arm").setRotation(-PI/360);
+    println("right_arm_rad"+avatar.getClip("right_arm").rad%PI/PI);
     break;
   default:
     avatar.state = "normal";
