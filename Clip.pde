@@ -37,7 +37,11 @@ class Clip {
   }
 
   void setRotation(float drad) {
-    this.rad = this.rad+drad;
+    this.rad = this.drad+drad;
+  }
+
+  void addRotation(float drad) {
+    this.rad += drad;
   }
 
   void setScale(float x, float y) {
@@ -49,6 +53,7 @@ class Clip {
     Matrix T = this.getGlobalMatrix();
     resetMatrix();
     applyMatrix(T.m00, T.m01, T.m02, T.m10, T.m11, T.m12);//ここで移動、回転、拡大、縮小している。
+    this.rad=this.drad;
     if (images.size() > 0) {
       imageMode(CENTER);
       image(images.get(num), 0, 0);
