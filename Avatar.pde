@@ -35,8 +35,8 @@ class Avatar {
     //this.getClip("glass").setParent(this.getClip("face"));
 
     this.getClip("face").images.add(0, loadImage("face1.png"));
-    this.getClip("lip").images.add(0, loadImage("lip.png"));
-    //this.getClip("lip").images.add(1, loadImage("lip_open.png"));
+    //this.getClip("lip").images.add(0, loadImage("lip.png"));
+    this.getClip("lip").images.add(0, loadImage("data/open_lip.png"));
     //this.getClip("lip").images.add(2, loadImage("lip_anger.png"));
     //this.getClip("lip").images.add(3, loadImage("lip_smile.png"));
     //this.getClip("lip").images.add(4, loadImage("lip_surprised.png"));
@@ -53,6 +53,8 @@ class Avatar {
     //this.getClip("face").setScale(0.2, 0.2);
     //this.getClip("body").setScale(3, 3);
     this.getClip("eye_r").setRotation(PI/40);
+    this.getClip("lip").setScale(0.8, 0.7);
+
   }
 
   void draw(int x, int y) {
