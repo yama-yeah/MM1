@@ -11,19 +11,20 @@ class Avatar {
   ArrayList<Clip> layers;
   boolean swing = false;
   int BASE_WIDTH=191;
+  int ran=0;
 
   Avatar() {
     this.state = "normal"; //"normal", "breath", "talk", "sleep", "smile", "anger", "surprised"
 
     layers = new ArrayList<Clip>();
     layers.add(new Clip("root", 0, 0, 0, 0,1,1,0));
-    layers.add(new Clip("right_arm", 47*7, -30, 0, 0,0.5,0.5,PI/2));
-    layers.add(new Clip("left_arm", -47*7, -30, 0, 0,0.5,0.5,PI/2));
-    layers.add(new Clip("body",0,1000,0,0,3,3,0));
     layers.add(new Clip("face", 0, -250*3, 0, 150*7,0.17,0.17,0));
     layers.add(new Clip("lip", 12*7, 65*7, 0, 0,1,1,0));
     layers.add(new Clip("eye_r", 47*7, -30, 0, 0,1,1,0));
     layers.add(new Clip("eye_l", -25*7, -50, 0, 0,1,1,0));
+    layers.add(new Clip("right_arm", 47*7, -30, 0, 0,0.5,0.5,PI/2));
+    layers.add(new Clip("left_arm", -47*7, -30, 0, 0,0.5,0.5,PI/2));
+    layers.add(new Clip("body",0,1000,0,0,3,3,0));
     
 
     this.getClip("face").setParent(this.getClip("root"));
@@ -44,10 +45,12 @@ class Avatar {
     //this.getClip("lip").images.add(3, loadImage("lip_smile.png"));
     //this.getClip("lip").images.add(4, loadImage("lip_surprised.png"));
     this.getClip("eye_l").images.add(0, loadImage("left_eye.png"));
+    this.getClip("eye_l").images.add(1, loadImage("close_left_eye.png"));
     //this.getClip("eye_l").images.add(1, loadImage("eye_l_anger.png"));
     //this.getClip("eye_l").images.add(2, loadImage("eye_l_sleep.png"));
     //this.getClip("eye_l").images.add(3, loadImage("eye_l_surprised.png"));
     this.getClip("eye_r").images.add(0, loadImage("right_eye.png"));
+    this.getClip("eye_r").images.add(1, loadImage("close_right_eye.png"));
     //this.getClip("eye_r").images.add(1, loadImage("eye_r_anger.png"));
     //this.getClip("eye_r").images.add(2, loadImage("eye_r_sleep.png"));
     //this.getClip("eye_r").images.add(3, loadImage("eye_r_surprised.png"));
@@ -90,6 +93,7 @@ class Avatar {
     }
     this.to_open_lip();
     this.armSwing();
+    this.random_close_eye();
     this.layers.get(0).setTranslation(x, y);
     for (int i=0; i<layers.size(); i++) {
       layers.get(i).draw();
@@ -114,12 +118,13 @@ class Avatar {
   }
 
   void breath() {
+    println("breath");
     for (int i=0; i<layers.size(); i++) {
       if (layers.get(i).name =="root") {
         if (frameCount % 4 < 2) {
-          layers.get(i).setRotation(PI/100.0);
+          layers.get(i).setRotation(PI/40);
         } else {
-          layers.get(i).setRotation(-PI/100.0);
+          layers.get(i).setRotation(-PI/40);
         }
       }
     }
@@ -144,9 +149,9 @@ class Avatar {
   void armSwing(){
     if(swing){  
       if (frameCount % 4 < 2) {
-        this.getClip("right_arm").setRotation(PI/40-PI/3);
+        this.getClip("right_arm").setRotation(PI/150+PI/3);
       } else {
-        this.getClip("right_arm").setRotation(-PI/40-PI/3);
+        this.getClip("right_arm").setRotation(-PI/150+PI/3);
       }
     }
   }
@@ -154,6 +159,7 @@ class Avatar {
   void onSwing(){
     if(swing){
       this.getClip("right_arm").setTranslation(this.getClip("right_arm").tx-10, this.getClip("right_arm").ty+100);
+      this.getClip("right_arm").setRotation(PI/2);
     }
     else{
       this.getClip("right_arm").setTranslation(this.getClip("right_arm").tx+10, this.getClip("right_arm").ty-100);
@@ -195,6 +201,25 @@ class Avatar {
     else{
       this.getClip("lip").setScale(1, 1);
       this.getClip("lip").num = 0;
+    }
+  }
+
+  void random_close_eye(){
+    if(ran==0){
+      this.getClip("eye_l").num = 0;
+      this.getClip("eye_l").setScale(1, 1);
+      this.getClip("eye_r").num = 0;
+      this.getClip("eye_r").setScale(1, 1);
+      ran=int(random(1,30));
+    }
+    else{
+      if(frameCount%ran==0){
+        this.getClip("eye_l").num = 1;
+        this.getClip("eye_l").setScale(2, 2);
+        this.getClip("eye_r").num = 1;
+        this.getClip("eye_r").setScale(2, 2);
+        ran=0;
+      }
     }
   }
 }

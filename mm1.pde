@@ -11,6 +11,9 @@ AudioPlayer player;
 Avatar avatar;
 boolean f=false;
 float sound_level;
+float temp_x=0,temp_y=0;
+int delta_x=0;
+int delta_y=0;
 
 void setup() {
   noCursor();
@@ -70,6 +73,7 @@ void keyPressed() {
     break;
   default:
     avatar.state = "normal";
+    avatar.getClip("root").setRotation(0);
     break;
   }
 }
