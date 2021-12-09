@@ -22,7 +22,6 @@ void setup() {
   avatar = new Avatar();
   minim = new Minim(this);  //初期化
   player = minim.loadFile("sound/self.mp3");  //sample.mp3をロードする
-  player.play();  //再生
 }
 
 void draw() {
@@ -70,6 +69,9 @@ void keyPressed() {
     break;
   case ' ':
     f=!f;
+    break;
+  case 'p':
+    player.play();  //再生
     break;
   default:
     avatar.state = "normal";

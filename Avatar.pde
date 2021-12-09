@@ -18,22 +18,22 @@ class Avatar {
 
     layers = new ArrayList<Clip>();
     layers.add(new Clip("root", 0, 0, 0, 0,1,1,0));
+    layers.add(new Clip("right_arm", 47*7, -30, 0, 0,0.5,0.5,PI/2));
+    layers.add(new Clip("left_arm", -47*7, -30, 0, 0,0.5,0.5,PI/2));
+    layers.add(new Clip("body",0,1000,0,0,3,3,0));
     layers.add(new Clip("face", 0, -250*3, 0, 150*7,0.17,0.17,0));
     layers.add(new Clip("lip", 12*7, 65*7, 0, 0,1,1,0));
     layers.add(new Clip("eye_r", 47*7, -30, 0, 0,1,1,0));
     layers.add(new Clip("eye_l", -25*7, -50, 0, 0,1,1,0));
-    layers.add(new Clip("right_arm", 47*7, -30, 0, 0,0.5,0.5,PI/2));
-    layers.add(new Clip("left_arm", -47*7, -30, 0, 0,0.5,0.5,PI/2));
-    layers.add(new Clip("body",0,1000,0,0,3,3,0));
     
+    this.getClip("body").setParent(this.getClip("face"));
+    this.getClip("right_arm").setParent(this.getClip("body"));
+    this.getClip("left_arm").setParent(this.getClip("body"));
 
     this.getClip("face").setParent(this.getClip("root"));
     this.getClip("lip").setParent(this.getClip("face"));
     this.getClip("eye_l").setParent(this.getClip("face"));
     this.getClip("eye_r").setParent(this.getClip("face"));
-    this.getClip("body").setParent(this.getClip("face"));
-    this.getClip("right_arm").setParent(this.getClip("body"));
-    this.getClip("left_arm").setParent(this.getClip("body"));
     //this.getClip("eyebrow_l").setParent(this.getClip("face"));
     //this.getClip("eyebrow_r").setParent(this.getClip("face"));
     //this.getClip("glass").setParent(this.getClip("face"));
