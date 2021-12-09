@@ -6,6 +6,7 @@ class Clip {
   float rad; //回転角（ラジアン）
   float dsx,dsy;//拡大縮小
   float sx,sy;
+  float ey;
   Clip parent; //親
   ArrayList<PImage> images;
   int num;
@@ -27,6 +28,12 @@ class Clip {
     num = 0;
   }
 
+  void reset() {
+    rad = drad;
+    //sx = dsx;
+    //sy = dsy;
+  }
+
   void setParent(Clip parent) {
     this.parent = parent;
   }
@@ -36,8 +43,14 @@ class Clip {
     this.ty = y;
   }
 
+  void addTranslation(int x, int y) {
+    this.tx += x;
+    this.ty += y;
+  }
+
   void setRotation(float drad) {
-    this.rad = this.drad+drad;
+    this.rad = drad;
+    //this.drad+drad;
   }
 
   void addRotation(float drad) {
@@ -53,7 +66,7 @@ class Clip {
     Matrix T = this.getGlobalMatrix();
     resetMatrix();
     applyMatrix(T.m00, T.m01, T.m02, T.m10, T.m11, T.m12);//ここで移動、回転、拡大、縮小している。
-    this.rad=this.drad;
+    //this.rad=this.drad;
     if (images.size() > 0) {
       imageMode(CENTER);
       image(images.get(num), 0, 0);
@@ -78,7 +91,6 @@ class Clip {
     r = r.multiply(m3);
     r = r.multiply(m4);
     r = r.multiply(m5);
-   
     return r;
   }
   
